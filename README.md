@@ -1,98 +1,160 @@
 <div align="center">
 
-# CheatLikePro 🕵️‍♂️
+# CheatLikePro
 
-**The Ultimate Stealthy Clipboard Assistant**
+**The Ultimate Stealthy Clipboard AI Assistant**
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-green)](https://github.com/GarvitOfficial/cheatLikePro)
+*Copy a question. Wait 1-2 seconds. Paste the exact answer.*
+
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-green)](https://github.com/GarvitOfficial/cheatLikePro)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen)](https://github.com/GarvitOfficial/cheatLikePro)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](https://github.com/GarvitOfficial/cheatLikePro)
 
 </div>
 
 ---
 
-## 🚀 What is this?
+## Overview
 
-**CheatLikePro** is a lightweight, background utility that gives you superpowers. It silently monitors your clipboard for questions, instantly fetches answers from advanced AI models (Gemini, DeepSeek, Llama, etc.), and places the answer right back into your clipboard.
+**CheatLikePro** is a lightweight, zero-dependency background utility powered by modern Large Language Models (LLMs) via OpenRouter.
 
-**You copy a question. You wait 2 seconds. You paste the answer.**
+It silently monitors your clipboard. Whenever you copy (`Ctrl+C` / `Cmd+C`) a question, problem, or prompt, **CheatLikePro** fetches the answer from the AI model and instantly updates your clipboard with the solution.
 
-It's sleek, it's fast, and it runs with **ZERO external dependencies** (no `pip install` required).
+> **No GUI. No Popups. Zero Latency. Zero Dependencies.**
 
-## ✨ Features
+---
 
-- **🕵️‍♂️ Stealth Mode**: Runs silently in the background. No GUI, no popups.
-- **⚡ Super Fast**: optimized for speed with low-latency models.
-- **🔌 Zero Dependencies**: Uses standard Python libraries only. Native `urllib` & `subprocess`.
-- **🌍 Cross-Platform**: Works flawlessly on **macOS**, **Windows**, and **Linux**.
-- **🤖 Multi-Model Support**: Defaults to `upstage/solar-pro-3` (free/fast), but compatiable with DeepSeek, Gemini, GPT-4o via OpenRouter.
-- **🧠 Smart Formatting**:
-  - **Code Questions**: Returns specific code only. No fluff.
-  - **MCQ**: Returns just the option (e.g., "B").
-  - **Math**: Returns just the number.
+## Workflow
 
-## 🛠️ Quick Start
+```mermaid
+flowchart LR
+    A[Copy Question] --> B[Silent Engine]
+    B --> C[OpenRouter AI]
+    C --> D[Update Clipboard]
+    D --> E[Paste Answer]
+```
 
-### 1. Get the Code
+
+
+---
+
+## Available Editions
+
+CheatLikePro comes in two specialized editions:
+
+| Feature | Standard Edition (`cheat.py`) | Linux & ML Edition (`cheat_linux.py`) |
+| :--- | :--- | :--- |
+| **Supported OS** | macOS, Windows, Linux | Linux (Native Display Engine) |
+| **Target Focus** | General Q&A, MCQs, Math & Code | Python, Data Science & ML Workflows |
+| **Default Model** | `upstage/solar-pro-3:free` | `nvidia/nemotron-3-super-120b-a12b:free` |
+| **Clipboard Backend** | Cross-platform standard sub-process | Wayland (`wl-clipboard`) & X11 (`xclip` / `xsel`) |
+| **Output Style** | Direct, concise & letter options for MCQs | Executable Python code (NumPy, Pandas, PyTorch) |
+| **Script Path** | [`./cheat.py`](file:///Users/ganu/Programming/cheatlikepro/cheatLikePro/cheat.py) | [`./cheat_linux.py`](file:///Users/ganu/Programming/cheatlikepro/cheatLikePro/cheat_linux.py) |
+
+---
+
+## Features
+
+- **Stealth Mode**: Operates silently in the background with no windows or popups.
+- **Zero External Dependencies**: Uses standard Python 3 standard library (`urllib`, `subprocess`, `threading`, `json`).
+- **Non-Blocking Multi-Threading**: Clipboard monitoring and network queries run on daemon threads.
+- **Linux Wayland & X11 Native**: Built-in auto-detection for `wl-clipboard` (Wayland) and `xclip`/`xsel` (X11).
+- **Multi-Model Ecosystem**: Works with OpenRouter models (DeepSeek-V3, Gemini 2.0, Nemotron, Llama 3, GPT-4o).
+- **Smart Output Formatting**:
+  - **Multiple Choice**: Returns only the answer option (e.g. `"B"`).
+  - **Code Problems**: Returns raw executable code without conversational fluff.
+  - **Math**: Returns exact numerical calculations.
+
+---
+
+## Quick Start
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/GarvitOfficial/cheatLikePro.git
 cd cheatLikePro
 ```
 
 ### 2. Configure API Key
-Get your key from [OpenRouter](https://openrouter.ai/keys) (gives you access to all top models).
+Get your free API Key from [OpenRouter](https://openrouter.ai/keys).
 
 ```bash
-# Create your configuration file
+# Create configuration file
 cp .env.example .env
 
-# Open .env and paste your key
-# OPENROUTER_API_KEY=sk-or-v1-...
+# Edit .env and paste your key
+# OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
 
-### 3. Run It
+---
+
+## Usage
+
+### Standard Cross-Platform Edition
 ```bash
 python3 cheat.py
 ```
 
-## 🎮 How To Use
-
-1.  **Start the script** (keep it running in a terminal).
-2.  **Highlight & Copy** (`Ctrl+C` / `Cmd+C`) any question or code problem.
-3.  **Wait** ~1-2 seconds.
-4.  **Paste** (`Ctrl+V` / `Cmd+V`). The answer will be there.
-
-> **Note**: It won't trigger for short text (<5 chars) to avoid spamming the API.
-
-## ⚙️ Configuration
-
-Edit the `.env` file to customize:
-
-```ini
-# API Key (Required)
-OPENROUTER_API_KEY=sk-or-your-key...
-
-# Model Selection
-# Recommended: upstage/solar-pro-3:free (Free, Smart)
-# Fast: google/gemini-2.0-flash-001
-# Smartest: deepseek/deepseek-chat
-MODEL_NAME=upstage/solar-pro-3:free
+### Linux & Machine Learning Edition
+```bash
+python3 cheat_linux.py
 ```
 
-## 🔒 Privacy & Safety
+#### Linux Display Server Prerequisites
+On Linux, install your display server's clipboard utility:
+```bash
+# Wayland
+sudo apt install wl-clipboard
 
--   **Process**: Your clipboard data is sent **ONLY** to the OpenRouter API.
--   **No Logging**: The script does not save your clipboard history to disk.
--   **Source Code**: The entire logic is in `cheat.py`. It's open source—read it yourself!
-
-## ⚠️ Disclaimer
-
-This tool is for **educational purposes only**. The authors are not responsible for any misuse during exams, interviews, or other controlled environments. Use responsibly. 😉
+# X11
+sudo apt install xclip
+```
 
 ---
 
-<div align="center">
-Made with ❤️ by <a href="https://github.com/GarvitOfficial">GarvitOfficial</a>
-</div>
+## Configuration (`.env`)
+
+Customize model selection in `.env`:
+
+```ini
+# OpenRouter API Key
+OPENROUTER_API_KEY=sk-or-v1-your-api-key-here
+
+# Selected Model
+MODEL_NAME=upstage/solar-pro-3:free
+```
+
+### Recommended Models
+
+| Model | ID | Speed | Best For |
+| :--- | :--- | :--- | :--- |
+| **Solar Pro 3 (Free)** | `upstage/solar-pro-3:free` | Ultra Fast | General QA & Fast MCQs |
+| **Nemotron 3 (Free)** | `nvidia/nemotron-3-super-120b-a12b:free` | Ultra Fast | Coding & Data Science |
+| **Gemini 2.0 Flash** | `google/gemini-2.0-flash-001` | Instant | Complex Reasoning |
+| **DeepSeek Chat** | `deepseek/deepseek-chat` | Fast | Algorithmic Code |
+
+---
+
+## How To Use
+
+1. Run the script in your terminal (`python3 cheat.py` or `python3 cheat_linux.py`).
+2. Copy any question or code prompt (`Ctrl+C` or `Cmd+C`).
+3. Wait 1 to 2 seconds.
+4. Paste (`Ctrl+V` or `Cmd+V`) — the answer replaces your clipboard.
+
+> *Text shorter than 5 characters is ignored to avoid accidental API calls.*
+
+---
+
+## Privacy & Safety
+
+- **Direct Connections**: All requests are sent directly to `https://openrouter.ai/api/v1/chat/completions`.
+- **Zero Logging**: No clipboard history is stored on disk.
+- **Open Source**: 100% open and inspectable Python code.
+
+---
+
+## License & Authors
+
+MIT License. Developed by [GarvitOfficial](https://github.com/GarvitOfficial) & [SonaliDuvesh](https://github.com/SonaliDuvesh).
