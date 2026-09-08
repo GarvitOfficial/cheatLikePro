@@ -320,7 +320,7 @@ class ClipboardCheat:
             pass
         finally:
             self.running = False
-            print("\n👋 Stopped!")
+            print("\n Stopped!")
 
 if __name__ == "__main__":
     ClipboardCheat().start()
